@@ -1,0 +1,21 @@
+
+<h1><%= "show the costume that was just added" %></h1>
+
+
+<div2>
+    <h2><%= "#{@costume.title}" %></h2>
+      <% if @costume.artist %>
+      <h3><%= link_to @costume.period_name, artist_path(@costume.period)%></h3>
+      <% end %>
+      <h3><%= "#{@costume.number_of_pieces}"%></h3>
+
+
+<p><%= link_to @costume.theater.name, theater_path(@costume.theater)%>,
+<%= link_to @costume.period.name, period_path(@costume.period)%></p>
+
+<p><%= link_to "Edit this costume", edit_costume_path(@costume) %></p>
+<% if @costume.period %>
+  <p><%= link_to "Add more costumes into #{@costume.period.name} period", new_costume_path %></p>
+<% end %>
+<p><%= link_to "Delete #{@pcostume.title}", @costume, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+</div2>

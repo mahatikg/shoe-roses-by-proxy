@@ -1,0 +1,24 @@
+
+<%= form_for(@costume) do |f| %>
+
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :number_of_pieces %>
+  <%= f.text_field :number_of_pieces %>
+
+  <br>
+    <ul>
+    <%= f.collection_radio_buttons :period_id, Period.all, :id, :name %>
+  </ul>
+<br>
+
+ <br>
+ <ul>
+   <%= f.collection_radio_buttons :theater_id, Theater.all, :id, :name %>
+ </ul>
+  <br>
+
+  <%= f.submit %>
+<% end %>
