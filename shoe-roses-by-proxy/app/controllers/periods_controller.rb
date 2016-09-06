@@ -11,12 +11,16 @@ class PeriodsController < ApplicationController
 
     def show
       @period = Period.find_by(id: params[:id])
-      @pcostumes = Costume.all
+      @costumes = Costume.all
     end
 
     def create
       @period = Period.create(period_params)
-      redirect_to new_period_path
+      respond_to do |f|
+        f.html { redirect_to periods_path}
+        f.json {render json: {name: @period.name, time_period: @period.time_period}
+      }
+      end
     end
 
     def edit
@@ -32,7 +36,7 @@ class PeriodsController < ApplicationController
     def destroy
       @period = Period.find_by(id: params[:id])
       @period.destroy
-      redirect_to welcome_path
+
     end
 
     private
@@ -42,7 +46,7 @@ class PeriodsController < ApplicationController
     end
 
     def period_params
-      params.require(:period).permit(:name, :life_span, :contemporary?)
+      params.require(:period).permit(:name, :time_period)
     end
 
 end

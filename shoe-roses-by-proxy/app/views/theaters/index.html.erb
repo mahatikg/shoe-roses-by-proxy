@@ -1,0 +1,12 @@
+
+<h1><%= "All Theaters" %></h1>
+
+<ul>
+  <% @theaters.each do |theater| %>
+
+    <li>
+
+       <%= link_to "#{theater.name}", theater_path(theater)%>
+
+    </li>
+  <% end %>

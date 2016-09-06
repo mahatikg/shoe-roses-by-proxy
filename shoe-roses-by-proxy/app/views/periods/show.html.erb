@@ -1,0 +1,14 @@
+<h1>Costumes Belonging to the <%= "#{@period.name}" %> period</h1>
+
+<% @costumes.each do |costume| %>
+  <% if costume.period_id == @period.id %>
+      <li>
+        <h4> <%= "#{costume.name}" %>, which is the property of <%="#{costume.theater.name}"%> </h4>
+      </li>
+      <% end %>
+  <% end %>
+
+
+  </div>
+  <%= link_to 'Add Costumes', new_costume_path%>
+  </div>

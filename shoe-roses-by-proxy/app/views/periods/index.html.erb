@@ -1,0 +1,17 @@
+<h1>All the Time Periods</h1>
+
+<ul>
+  <% @periods.each do |period| %>
+
+    <li>
+
+       <%= link_to "#{period.name} ~ #{period.time_period}", period_path(period)%>
+
+    </li>
+  <% end %>
+
+
+
+</ul>
+
+<%= link_to 'Add a Time Period', new_period_path %>

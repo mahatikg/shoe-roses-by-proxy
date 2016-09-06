@@ -1,5 +1,5 @@
 class CostumesController < ApplicationController
-  #before_action :set_painting, only: [:show, :new, :create, :edit, :update, :destroy]
+  #before_action :set_costume, only: [:show, :new, :create, :edit, :update, :destroy]
 
  def new
    @costume = Costume.new
@@ -15,31 +15,29 @@ class CostumesController < ApplicationController
 
  def create
    @costume = Costume.create(costume_params)
-   redirect_to costume_path(@costume)
+  #  redirect_to costume_path (@costume)
+   respond_to do |f|
+     f.html { redirect_to costume_path(@costume)}
+     f.json {render json: {name: @costume.name, number_of_pieces: @costume.number_of_pieces, period: @costume.period, theater: @costume.theater}
+   }
+   end
  end
 
  def edit
    @costume = Costume.find_by(id: params[:id])
-   #for our view we had to change from collection_check_boxes
-   #to collection_radio_buttons simply to avoid a undefined method to_i error
-   #unsure why this internal method within the collection_check_boxes is causing errors
+
  end
 
  def update
    @costume = Costume.find_by(id: params[:id])
    @costume.update(costume_params)
-   #we have to use to_i on the gallery and artist because we are pretty sure
-   #radio_buttons converts everything to a string and it wasn't updating id numbers
-   #that were strings. this makes sense since we got a to_i error with check_boxes prior
-
-   redirect_to painting_path(@costume)
+   redirect_to costume_path(@costume)
  end
 
  def destroy
    @costume = Costume.find_by(id: params[:id])
-   @gallery = @costume.gallery
    @costume.destroy
-   redirect_to gallery_path(@gallery)
+   redirect_to costume_path
  end
 
  private
@@ -49,8 +47,8 @@ class CostumesController < ApplicationController
  end
 
   def costume_params
-   params.require(:costume).permit(:period_id, :theater_id, :title, :num_pieces)
+   params.require(:costume).permit(:period_id, :theater_id, :name, :number_of_pieces)
   end
 
-  
+
 end
